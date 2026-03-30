@@ -40,6 +40,8 @@
   align-items: center;
   justify-content: space-between;
   height: 72px;
+  position: relative;
+  z-index: 2;
 }
 
 .nav__brand {
@@ -95,6 +97,7 @@
   transition: color var(--transition-fast);
   position: relative;
   padding: var(--space-xs) 0;
+  white-space: nowrap;
 }
 
 .nav__link::after {
@@ -154,15 +157,14 @@
   transform: translateY(-7px) rotate(-45deg);
 }
 
-/* Mobile Menu Overlay — slide in from right */
+/* Mobile Menu Overlay — slide in from right, full viewport coverage */
 .nav__mobile {
   display: flex;
   position: fixed;
   inset: 0;
-  top: 72px;
   background-color: var(--color-surface);
-  z-index: 99;
-  padding: var(--space-xl) var(--space-lg);
+  z-index: 1;
+  padding: calc(72px + var(--space-xl)) var(--space-lg) var(--space-xl);
   flex-direction: column;
   gap: var(--space-lg);
   overflow-y: auto;
@@ -174,9 +176,9 @@
               visibility 0.35s;
 }
 
-/* When opened from the compact scroll header, start below it */
+/* When opened from the compact scroll header */
 .nav__mobile--from-scroll {
-  top: 56px;
+  padding-top: calc(56px + var(--space-xl));
   z-index: 201;
 }
 
@@ -521,9 +523,10 @@
   }
 }
 
-/* Mobile menu for two-tier uses the same nav__mobile styles */
+/* Mobile menu for two-tier: needs more padding-top than single-tier nav */
 .nav--two-tier .nav__mobile {
   top: 0;
+  padding-top: 130px;
 }
 
 /* Contact info inside mobile menu */
@@ -1046,6 +1049,9 @@
   order: 1;
   width: 100%;
   min-height: 300px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .hero--half .hero__image-placeholder,
@@ -1089,7 +1095,7 @@
 
 @media (min-width: 1024px) {
   .hero--half .hero__content {
-    padding: var(--space-4xl) var(--space-4xl) var(--space-4xl) var(--space-3xl);
+    padding: var(--space-4xl);
   }
 }
 
@@ -1272,7 +1278,7 @@
 
 @media (min-width: 1024px) {
   .hero--half.hero--reverse .hero__content {
-    padding: var(--space-4xl) var(--space-3xl) var(--space-4xl) var(--space-4xl);
+    padding: var(--space-4xl);
   }
 }
 
@@ -1967,6 +1973,114 @@ body:has(.nav--transparent) .hero--showcase {
   color: var(--color-primary);
 }
 
+/* =============================================
+   BRANDED NAV
+   Solid primary-colour background with white text.
+   Add .nav--branded to the <nav> element.
+   Works with both default and two-tier layouts.
+   ============================================= */
+.nav--branded {
+  background-color: var(--color-primary);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Brand name: white */
+.nav--branded .nav__name {
+  color: var(--color-text-inverse);
+}
+
+/* Strapline: secondary accent */
+.nav--branded .nav__title {
+  color: var(--color-secondary-light);
+}
+
+/* Nav links: white default */
+.nav--branded .nav__link {
+  color: var(--color-text-inverse);
+}
+
+/* Hover: secondary accent, active: stay white (underline provides the accent) */
+.nav--branded .nav__link:hover {
+  color: var(--color-secondary-light);
+}
+
+.nav--branded .nav__link--active {
+  color: var(--color-text-inverse);
+}
+
+/* Active underline: secondary accent */
+.nav--branded .nav__link--active::after {
+  background-color: var(--color-secondary-light);
+}
+
+/* CTA button: secondary colour to stand out against primary bg */
+.nav--branded .btn--primary,
+.nav--branded .nav__cta {
+  background-color: var(--color-secondary);
+  border-color: var(--color-secondary);
+  color: var(--color-text-inverse);
+}
+
+.nav--branded .btn--primary:hover,
+.nav--branded .nav__cta:hover {
+  background-color: var(--color-secondary-dark);
+  border-color: var(--color-secondary-dark);
+}
+
+/* Hamburger: white bars */
+.nav--branded .nav__toggle-bar {
+  background-color: var(--color-text-inverse);
+}
+
+/* Dropdown menu: reset to white bg with dark text */
+.nav--branded .nav__dropdown-menu {
+  background-color: var(--color-surface);
+}
+
+.nav--branded .nav__dropdown-menu .nav__link,
+.nav--branded .nav__dropdown-menu .nav__dropdown-link {
+  color: var(--color-text);
+}
+
+.nav--branded .nav__dropdown-menu .nav__link:hover,
+.nav--branded .nav__dropdown-menu .nav__dropdown-link:hover {
+  color: var(--color-primary);
+}
+
+/* Mobile menu: white bg, restore dark text */
+.nav--branded .nav__mobile .nav__link {
+  color: var(--color-text);
+}
+
+.nav--branded .nav__mobile .nav__link:hover,
+.nav--branded .nav__mobile .nav__link--active {
+  color: var(--color-primary);
+}
+
+.nav--branded .nav__mobile .btn--primary {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+/* --- Two-tier branded: uniform colour, subtle divider --- */
+.nav--two-tier.nav--branded .nav__top {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav--two-tier.nav--branded .nav__bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav--two-tier.nav--branded .nav__contact-item a,
+.nav--two-tier.nav--branded .nav__contact-item {
+  color: var(--color-text-inverse);
+}
+
+/* Contact icons: secondary accent */
+.nav--two-tier.nav--branded .nav__contact-item svg {
+  color: var(--color-secondary-light);
+}
+
 /* Stat bar — hidden by default */
 .hero__stats {
   display: none;
@@ -1980,6 +2094,15 @@ body:has(.nav--transparent) .hero--showcase {
   grid-template-columns: 1fr;
   gap: var(--space-2xl);
   align-items: center;
+}
+
+.intro__image-wrap {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  min-height: 400px;
 }
 
 .intro__image {
@@ -2473,12 +2596,19 @@ a.card--service:hover .card__link {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-2xl);
-  align-items: center;
+  align-items: stretch;
 }
 
 .about-hero h1,
 .about-hero h2 {
   margin-bottom: var(--space-lg);
+}
+
+.about-hero__image-wrap {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 400px;
 }
 
 .about-hero__image {
@@ -2532,6 +2662,71 @@ a.card--service:hover .card__link {
   }
 
   .about-hero__inner > div:last-child {
+    padding: var(--space-4xl);
+  }
+}
+
+/* =============================================
+   ABOUT: SPLIT THIRD
+   1fr image (left) + 2fr text (right).
+   Narrower image column than about-hero.
+   Uses background-image for full-bleed coverage.
+   ============================================= */
+.about-split-third {
+  padding: 0;
+}
+
+.about-split-third__inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2xl);
+  align-items: stretch;
+}
+
+.about-split-third h1,
+.about-split-third h2 {
+  margin-bottom: var(--space-lg);
+}
+
+.about-split-third__image-wrap {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 350px;
+}
+
+.about-split-third__text {
+  padding: var(--space-2xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.about-split-third__text p {
+  color: var(--color-text-light);
+  line-height: var(--line-height-relaxed);
+}
+
+.about-split-third__text p + p {
+  margin-top: var(--space-md);
+}
+
+@media (min-width: 768px) {
+  .about-split-third {
+    overflow: hidden;
+  }
+
+  .about-split-third__inner {
+    grid-template-columns: 1fr 2fr;
+    gap: 0;
+  }
+
+  .about-split-third__image-wrap {
+    overflow: hidden;
+    min-height: 500px;
+  }
+
+  .about-split-third__text {
     padding: var(--space-4xl);
   }
 }
@@ -3468,6 +3663,58 @@ a.card--service:hover .card__link {
   .two-col-text__columns {
     grid-template-columns: 1fr 1fr;
     gap: var(--space-2xl);
+  }
+}
+
+/* =============================================
+   CONTENT: STORY TEXT
+   Centred header spanning full width, then a
+   two-column layout: large pull-quote (left)
+   and regular body text (right).
+   ============================================= */
+.story-text {
+  max-width: var(--container-wide);
+  margin: 0 auto;
+}
+
+.story-text__header {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+}
+
+.story-text__body {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+  align-items: start;
+}
+
+.story-text__quote {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  font-weight: 400;
+  line-height: 1.4;
+  font-style: italic;
+  color: var(--color-text-heading);
+}
+
+.story-text__content p {
+  color: var(--color-text-light);
+  line-height: var(--line-height-relaxed);
+}
+
+.story-text__content p + p {
+  margin-top: var(--space-md);
+}
+
+@media (min-width: 768px) {
+  .story-text__header {
+    margin-bottom: var(--space-3xl);
+  }
+
+  .story-text__body {
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--space-3xl);
   }
 }
 
@@ -6082,6 +6329,30 @@ a.card--service:hover .card__link {
 
 .cookie-banner__accept:hover {
   background: var(--color-primary-dark);
+}
+
+.cookie-banner__decline {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  padding: var(--space-sm) var(--space-xl);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  white-space: nowrap;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.cookie-banner__decline:hover {
+  color: var(--color-text-inverse);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.cookie-banner__buttons {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: center;
 }
 
 @media (min-width: 768px) {

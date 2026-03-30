@@ -45,3 +45,14 @@
   --text-h2-desktop: 2rem;
   --text-h3-desktop: 1.3rem;
 }
+
+/* =============================================
+   SITE-SPECIFIC LAYOUT OVERRIDES
+   ============================================= */
+
+/* Homepage intro: 2/3 text + 1/3 video */
+@media (min-width: 768px) {
+  .intro-grid {
+    grid-template-columns: 2fr 1fr !important;
+  }
+}
