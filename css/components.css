@@ -178,7 +178,7 @@
 
 /* When opened from the compact scroll header */
 .nav__mobile--from-scroll {
-  padding-top: calc(56px + var(--space-xl));
+  padding-top: calc(56px + var(--space-sm));
   z-index: 201;
 }
 
@@ -526,7 +526,7 @@
 /* Mobile menu for two-tier: needs more padding-top than single-tier nav */
 .nav--two-tier .nav__mobile {
   top: 0;
-  padding-top: 130px;
+  padding-top: 90px;
 }
 
 /* Contact info inside mobile menu */
@@ -648,12 +648,28 @@
   height: 20px;
 }
 
+/* WhatsApp icon in compact scroll header — mobile only */
+.nav-scroll__wa-icon {
+  display: flex;
+  align-items: center;
+  color: var(--color-primary);
+}
+
+.nav-scroll__wa-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
 @media (min-width: 600px) {
   .nav-scroll__phone {
     display: flex;
   }
 
   .nav-scroll__phone-icon {
+    display: none;
+  }
+
+  .nav-scroll__wa-icon {
     display: none;
   }
 }
