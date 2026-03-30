@@ -3544,6 +3544,11 @@ a.card--service:hover .card__link {
   margin-bottom: var(--space-lg);
 }
 
+/* Gap between consecutive containers within a section (e.g. intro para then content grid) */
+.section .container + .container {
+  margin-top: var(--space-2xl);
+}
+
 /* Remove section padding and margin so split--bleed truly reaches the edges */
 .section:has(.split--bleed) {
   padding: 0;
@@ -3734,12 +3739,12 @@ a.card--service:hover .card__link {
 
 /* =============================================
    CONTENT: HIGHLIGHT BOX
-   Colored left panel + white right panel.
-   Used for standout callouts / key messages.
+   Stacked card: dark header on top (full width, centred),
+   white body below (centred). Used for standout callouts.
    ============================================= */
 .highlight-box {
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-direction: column;
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
@@ -3748,28 +3753,31 @@ a.card--service:hover .card__link {
 .highlight-box__heading {
   background-color: var(--color-primary);
   color: var(--color-text-inverse);
-  padding: var(--space-xl);
-  display: flex;
-  align-items: center;
+  padding: var(--space-lg) var(--space-xl);
+  text-align: center;
 }
 
 .highlight-box__heading h3 {
   color: var(--color-text-inverse);
-  font-size: var(--text-h3-desktop);
+  font-size: 1rem;
   line-height: var(--line-height-tight);
+  margin: 0;
 }
 
 .highlight-box__content {
   background-color: var(--color-surface);
-  padding: var(--space-xl);
+  padding: var(--space-lg) var(--space-xl);
+  text-align: center;
   border: 1px solid var(--color-border-light);
   border-top: none;
+  flex: 1;
 }
 
 .highlight-box__content p {
   color: var(--color-text-light);
   line-height: var(--line-height-relaxed);
   font-size: var(--text-sm);
+  margin: 0;
 }
 
 /* Secondary colour variant */
@@ -3786,21 +3794,15 @@ a.card--service:hover .card__link {
 .highlight-box--soft .highlight-box__heading {
   background-color: var(--color-bg-alt);
   color: var(--color-text-heading);
+  text-align: left;
 }
 
 .highlight-box--soft .highlight-box__heading h3 {
   color: var(--color-text-heading);
 }
 
-@media (min-width: 768px) {
-  .highlight-box {
-    grid-template-columns: 1fr 2fr;
-  }
-
-  .highlight-box__content {
-    border-top: 1px solid var(--color-border-light);
-    border-left: none;
-  }
+.highlight-box--soft .highlight-box__content {
+  text-align: left;
 }
 
 /* =============================================

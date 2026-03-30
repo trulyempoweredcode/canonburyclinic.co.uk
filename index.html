@@ -249,8 +249,11 @@
             <a href="about.html" class="btn btn--secondary">Meet Hussein</a>
           </div>
           <div>
-            <div style="position: relative; height: 100%; min-height: 280px; overflow: hidden; border-radius: var(--radius-lg);">
-              <iframe src="https://www.youtube.com/embed/YGZXtnWfKYs" title="Welcome from Hussein Eshref" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+            <div onclick="this.innerHTML='<iframe src=\'https://www.youtube.com/embed/YGZXtnWfKYs?autoplay=1\' title=\'Welcome from Hussein Eshref\' frameborder=\'0\' allow=\'autoplay; clipboard-write; encrypted-media; picture-in-picture\' allowfullscreen style=\'position:absolute;top:0;left:0;width:100%;height:100%;\'></iframe>';this.style.cursor='default';" style="position: relative; height: 100%; min-height: 280px; overflow: hidden; border-radius: var(--radius-lg); cursor: pointer; background: url('https://img.youtube.com/vi/YGZXtnWfKYs/maxresdefault.jpg') center/cover no-repeat;">
+              <div style="position: absolute; bottom: 1.25rem; left: 1.25rem; background: rgba(255,255,255,0.95); border-radius: 50px; padding: 0.5rem 1.25rem; display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-heading); font-size: 0.875rem; font-weight: 600; color: var(--color-primary); box-shadow: 0 2px 12px rgba(0,0,0,0.25); transition: transform 0.15s ease;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                Watch Video
+              </div>
             </div>
           </div>
         </div>

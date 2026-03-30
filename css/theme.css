@@ -67,6 +67,11 @@
   text-align: center;
 }
 
+/* Breadcrumbs: centre within page headers */
+.page-header .breadcrumbs {
+  justify-content: center;
+}
+
 /* Breadcrumbs: spacing and base style */
 .page-header .breadcrumbs {
   margin-bottom: var(--space-md);
