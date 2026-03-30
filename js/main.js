@@ -260,8 +260,8 @@
         }
       });
     }, {
-      threshold: 0.15,
-      rootMargin: '0px 0px -40px 0px'
+      threshold: 0.05,
+      rootMargin: '0px 0px 80px 0px'
     });
 
     revealEls.forEach(function (el) {
@@ -386,15 +386,23 @@
      ----------------------------------------- */
   var cookieBanner = document.querySelector('.cookie-banner');
   if (cookieBanner) {
-    var accepted = localStorage.getItem('cookie_consent');
-    if (!accepted) {
+    var consent = localStorage.getItem('cookie_consent');
+    if (!consent) {
       cookieBanner.classList.add('cookie-banner--visible');
     }
 
     var acceptBtn = cookieBanner.querySelector('.cookie-banner__accept');
     if (acceptBtn) {
       acceptBtn.addEventListener('click', function () {
-        localStorage.setItem('cookie_consent', '1');
+        localStorage.setItem('cookie_consent', 'accepted');
+        cookieBanner.classList.remove('cookie-banner--visible');
+      });
+    }
+
+    var declineBtn = cookieBanner.querySelector('.cookie-banner__decline');
+    if (declineBtn) {
+      declineBtn.addEventListener('click', function () {
+        localStorage.setItem('cookie_consent', 'declined');
         cookieBanner.classList.remove('cookie-banner--visible');
       });
     }
