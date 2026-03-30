@@ -1,0 +1,47 @@
+/* =============================================
+   THEME: Custom Teal (Canonbury Clinic)
+   Professional, clean — osteopathy, healthcare
+   Font Pairing: Friendly (Poppins + Merriweather)
+   ============================================= */
+
+/* --- Google Fonts --- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap');
+
+/* --- Theme Variables --- */
+:root {
+  /* Colour Palette — based on #176F7D */
+  --color-primary: #176F7D;
+  --color-primary-light: #3A95A3;
+  --color-primary-dark: #0E4D57;
+  --color-secondary: #C48B5B;
+  --color-secondary-light: #D4A87A;
+  --color-secondary-dark: #956438;
+  --color-accent: #7B6E99;
+  --color-accent-light: #9B8FB3;
+
+  --color-bg: #F7FAFB;
+  --color-bg-alt: #E8F1F3;
+  --color-bg-dark: #0E2E33;
+  --color-surface: #FFFFFF;
+  --color-surface-alt: #F0F6F7;
+
+  --color-text: #2D3638;
+  --color-text-light: #5E6E72;
+  --color-text-inverse: #F7FAFB;
+  --color-text-heading: #0E2E33;
+
+  --color-border: #D0DCE0;
+  --color-border-light: #E4ECEE;
+
+  --color-success: #2A8F6F;
+  --color-error: #C45B5B;
+
+  /* Typography */
+  --font-heading: 'Poppins', 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Merriweather', Georgia, 'Times New Roman', serif;
+
+  /* Font sizes — Poppins renders larger, so reduce heading sizes */
+  --text-h1-desktop: 2.5rem;
+  --text-h2-desktop: 2rem;
+  --text-h3-desktop: 1.3rem;
+}
