@@ -1947,6 +1947,12 @@ body:has(.nav--transparent) .hero--showcase {
   color: var(--color-text);
 }
 
+.nav--transparent-dark .nav__mobile .nav__mobile-contact a,
+.nav--transparent-dark .nav__mobile .nav__mobile-contact svg,
+.nav--transparent-dark .nav__mobile .nav__mobile-contact .nav__contact-item {
+  color: var(--color-text);
+}
+
 .nav--transparent-dark .nav__mobile .nav__toggle-bar {
   background-color: var(--color-text);
 }
