@@ -97,14 +97,11 @@ body {
 
 img,
 picture,
-video {
+video,
+svg {
   display: block;
   max-width: 100%;
   height: auto;
-}
-
-svg {
-  display: block;
 }
 
 input,
@@ -146,7 +143,6 @@ h1 {
 
 h2 {
   font-size: var(--text-h2);
-  margin-bottom: var(--space-xl);
 }
 
 h3 {
@@ -249,12 +245,6 @@ strong {
   text-decoration: none;
   border: 2px solid transparent;
   white-space: nowrap;
-}
-
-.btn svg {
-  width: 1em;
-  height: 1em;
-  flex-shrink: 0;
 }
 
 .btn--primary {
