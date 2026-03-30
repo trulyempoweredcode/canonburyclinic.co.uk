@@ -61,3 +61,35 @@
 .intro-grid h2 {
   margin-bottom: var(--space-xl);
 }
+
+/* Page header: centre all content sitewide */
+.page-header .container {
+  text-align: center;
+}
+
+/* Breadcrumbs: spacing and base style */
+.page-header .breadcrumbs {
+  margin-bottom: var(--space-md);
+}
+
+/* Breadcrumbs: light text on dark backgrounds (fixes selector mismatch in components.css) */
+.page-header--dark .breadcrumbs__item a,
+.page-header--image .breadcrumbs__item a {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+}
+
+.page-header--dark .breadcrumbs__item a:hover,
+.page-header--image .breadcrumbs__item a:hover {
+  color: #ffffff;
+}
+
+.page-header--dark .breadcrumbs__item--active,
+.page-header--image .breadcrumbs__item--active {
+  color: #ffffff;
+}
+
+.page-header--dark .breadcrumbs__separator,
+.page-header--image .breadcrumbs__separator {
+  color: rgba(255, 255, 255, 0.4);
+}
