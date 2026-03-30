@@ -2219,7 +2219,7 @@ body:has(.nav--transparent) .hero--showcase {
 }
 
 .card__title {
-  font-size: 1rem;
+  font-size: var(--text-h3-desktop);
   margin-top: var(--space-xs);
   margin-bottom: var(--space-sm);
 }
@@ -3759,7 +3759,7 @@ a.card--service:hover .card__link {
 
 .highlight-box__heading h3 {
   color: var(--color-text-inverse);
-  font-size: 1rem;
+  font-size: var(--text-h3-desktop);
   line-height: var(--line-height-tight);
   margin: 0;
 }
