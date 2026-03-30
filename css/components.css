@@ -3519,7 +3519,6 @@ a.card--service:hover .card__link {
 .split--bleed {
   display: grid;
   grid-template-columns: 1fr;
-  align-items: center;
 }
 
 .split--bleed .split__image {
@@ -3537,10 +3536,16 @@ a.card--service:hover .card__link {
   margin-bottom: var(--space-lg);
 }
 
+/* Remove section padding so split--bleed truly reaches the edges */
+.section:has(.split--bleed) {
+  padding: 0;
+}
+
 @media (min-width: 768px) {
   .split--bleed {
     grid-template-columns: 1fr 1fr;
     gap: 0;
+    align-items: stretch;
   }
 
   .split--bleed .split__image {
@@ -3549,7 +3554,7 @@ a.card--service:hover .card__link {
   }
 
   .split--bleed .split__content {
-    padding: var(--space-2xl) var(--space-4xl);
+    padding: var(--space-4xl);
   }
 
   /* Reverse: image on right */
