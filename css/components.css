@@ -146,7 +146,7 @@
 }
 
 .nav__toggle--open .nav__toggle-bar {
-  background-color: var(--color-text-heading);
+  background-color: var(--color-text-heading) !important;
 }
 
 .nav__toggle--open .nav__toggle-bar:nth-child(1) {
@@ -575,8 +575,8 @@
 }
 
 /* Force readable dark colour on white overlay — overrides nav__contact-item a light colour */
-.nav__mobile-contact a,
-.nav__mobile-contact .nav__contact-item {
+.nav__mobile .nav__mobile-contact a,
+.nav__mobile .nav__mobile-contact .nav__contact-item {
   color: var(--color-text);
 }
 
@@ -722,6 +722,21 @@
   height: 2px;
   background-color: var(--color-text);
   border-radius: 2px;
+  transition: all var(--transition-base);
+  transform-origin: center;
+}
+
+/* Transform nav-scroll hamburger into X when from-scroll overlay is open */
+body:has(.nav__mobile--from-scroll.nav__mobile--open) .nav-scroll__toggle-bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+body:has(.nav__mobile--from-scroll.nav__mobile--open) .nav-scroll__toggle-bar:nth-child(2) {
+  opacity: 0;
+}
+
+body:has(.nav__mobile--from-scroll.nav__mobile--open) .nav-scroll__toggle-bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
 }
 
 /* =============================================
