@@ -145,6 +145,10 @@
   transform-origin: center;
 }
 
+.nav__toggle--open .nav__toggle-bar {
+  background-color: var(--color-text-heading);
+}
+
 .nav__toggle--open .nav__toggle-bar:nth-child(1) {
   transform: translateY(7px) rotate(45deg);
 }
@@ -568,6 +572,12 @@
 .nav__mobile-contact .nav__contact-item {
   display: flex;
   font-size: var(--text-base);
+}
+
+/* Force readable dark colour on white overlay — overrides nav__contact-item a light colour */
+.nav__mobile-contact a,
+.nav__mobile-contact .nav__contact-item {
+  color: var(--color-text);
 }
 
 @media (min-width: 900px) {
