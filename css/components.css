@@ -1943,6 +1943,10 @@ body:has(.nav--transparent) .hero--showcase {
   color: var(--color-primary);
 }
 
+.nav--transparent-dark .nav__mobile .nav__mobile-expand {
+  color: var(--color-text);
+}
+
 .nav--transparent-dark .nav__mobile .nav__toggle-bar {
   background-color: var(--color-text);
 }
