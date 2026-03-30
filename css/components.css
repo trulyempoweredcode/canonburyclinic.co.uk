@@ -2211,8 +2211,16 @@ body:has(.nav--transparent) .hero--showcase {
   height: 24px;
 }
 
+.card__date {
+  font-family: var(--font-heading);
+  font-size: var(--text-sm);
+  color: var(--color-text-light);
+  margin-bottom: var(--space-xs);
+}
+
 .card__title {
-  font-size: calc(var(--text-h3-desktop) * 0.8);
+  font-size: 1rem;
+  margin-top: var(--space-xs);
   margin-bottom: var(--space-sm);
 }
 
@@ -3536,9 +3544,10 @@ a.card--service:hover .card__link {
   margin-bottom: var(--space-lg);
 }
 
-/* Remove section padding so split--bleed truly reaches the edges */
+/* Remove section padding and margin so split--bleed truly reaches the edges */
 .section:has(.split--bleed) {
   padding: 0;
+  margin: 0;
 }
 
 @media (min-width: 768px) {
@@ -6637,6 +6646,26 @@ a.card--service:hover .card__link {
 .blog-card__link svg {
   width: 16px;
   height: 16px;
+}
+
+/* =============================================
+   LEGAL CONTENT
+   Privacy, cookies, terms — long-form prose pages
+   ============================================= */
+.legal-content h2 {
+  margin-top: var(--space-3xl);
+  margin-bottom: var(--space-md);
+}
+
+.legal-content h3 {
+  margin-top: var(--space-2xl);
+  margin-bottom: var(--space-sm);
+}
+
+.legal-content p,
+.legal-content ul,
+.legal-content ol {
+  margin-bottom: var(--space-md);
 }
 
 /* =============================================
