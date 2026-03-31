@@ -278,47 +278,50 @@
           <div class="contact-form-card card">
             <h2>Send Us a Message</h2>
             <p>Fill in the form below and we&rsquo;ll get back to you as soon as possible.</p>
-            <form action="https://editmy.site/api/form/4" method="POST" class="form">
+            <form class="form" action="/api/form/4" method="POST" data-thank-you="Thank you for your message. We will be in touch soon.">
               <div style="display:none"><input type="text" name="_hp" tabindex="-1" autocomplete="off"></div>
-              <input type="hidden" name="_t" value="">
-              <div class="form__row">
-                <div class="form__group">
-                  <label for="name" class="form__label form__label--required">Full Name</label>
-                  <input type="text" id="name" name="name" class="form__input" placeholder="Your full name" required>
-                </div>
-                <div class="form__group">
-                  <label for="email" class="form__label form__label--required">Email Address</label>
-                  <input type="email" id="email" name="email" class="form__input" placeholder="your@email.com" required>
-                </div>
-              </div>
-              <div class="form__row">
-                <div class="form__group">
-                  <label for="phone" class="form__label">Phone Number</label>
-                  <input type="tel" id="phone" name="phone" class="form__input" placeholder="Your phone number">
-                </div>
-                <div class="form__group">
-                  <label for="callback" class="form__label">Preferred Callback Time</label>
-                  <select id="callback" name="callback_time" class="form__select">
-                    <option value="">Select a time</option>
-                    <option value="early-morning">Early Morning (6:30am &ndash; 8:00am)</option>
-                    <option value="morning">Morning (8:00am &ndash; 10:00am)</option>
-                    <option value="late-morning">Late Morning (10:00am &ndash; 12:00pm)</option>
-                    <option value="afternoon">Early Afternoon (12:00pm &ndash; 1:00pm)</option>
-                    <option value="no-preference">No Preference</option>
-                  </select>
-                </div>
+              <div class="form__group">
+                <label for="full_name" class="form__label form__label--required">Full Name</label>
+                <input type="text" id="full_name" name="full_name" class="form__input" placeholder="Your full name" required autocomplete="name">
               </div>
               <div class="form__group">
-                <label for="message" class="form__label form__label--required">Your Message</label>
-                <textarea id="message" name="message" class="form__textarea" placeholder="Tell us about your symptoms or what you'd like help with..." required></textarea>
+                <label for="email_address" class="form__label form__label--required">Email Address</label>
+                <input type="email" id="email_address" name="email_address" class="form__input" placeholder="you@example.com" required autocomplete="email">
               </div>
-              <div class="form__group form__group--checkbox">
-                <input type="checkbox" id="consent" name="consent" required>
-                <label for="consent">I agree to the <a href="privacy.html">privacy policy</a> and consent to being contacted about my enquiry.</label>
+              <div class="form__group">
+                <label for="phone_number" class="form__label">Phone Number</label>
+                <input type="tel" id="phone_number" name="phone_number" class="form__input" placeholder="07xxx xxxxxx" autocomplete="tel">
               </div>
-              <button type="submit" class="btn btn--primary" style="width: 100%;">Send Message</button>
-              <p class="form__consent">We&rsquo;ll never share your information. See our <a href="privacy.html">privacy policy</a>.</p>
+              <div class="form__group">
+                <label for="your_message" class="form__label form__label--required">Your Message</label>
+                <textarea id="your_message" name="your_message" class="form__textarea" required></textarea>
+              </div>
+              <div>
+                <button type="submit" class="btn btn--primary" style="width: 100%;">Send Message</button>
+              </div>
+              <p style="font-size: var(--text-xs); color: var(--color-text-light); text-align: center;">By submitting this form, you agree to our <a href="../privacy/" style="color: var(--color-primary); text-decoration: underline;">privacy policy</a>. Your information will never be shared with third parties.</p>
             </form>
+            <script>
+            (function(){
+              var f=document.querySelector(".contact-form-wrap .form");
+              if(!f)return;
+              f.addEventListener("submit",function(e){
+                e.preventDefault();
+                var btn=f.querySelector("button[type=submit]");
+                btn.disabled=true;btn.textContent="Sending\u2026";
+                fetch(f.action,{method:"POST",body:new URLSearchParams(new FormData(f))})
+                .then(function(r){return r.json()})
+                .then(function(d){
+                  var msg=f.getAttribute("data-thank-you")||"Thank you for your message.";
+                  f.innerHTML='<div style="text-align:center;padding:var(--space-xl) 0"><p style="font-size:var(--text-lg);color:var(--color-primary);font-weight:600">'+msg+'</p></div>';
+                })
+                .catch(function(){
+                  btn.disabled=false;btn.textContent="Send Message";
+                  alert("Something went wrong. Please try again.");
+                });
+              });
+            })();
+            </script>
           </div>
 
         </div>
