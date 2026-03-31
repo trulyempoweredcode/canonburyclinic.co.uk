@@ -293,11 +293,20 @@
                 <input type="tel" id="phone_number" name="phone_number" class="form__input" placeholder="07xxx xxxxxx" autocomplete="tel">
               </div>
               <div class="form__group">
+                <label for="preferred_callback_time" class="form__label form__label--required">Preferred Callback Time</label>
+                <select id="preferred_callback_time" name="preferred_callback_time" class="form__input" required>
+                  <option value="">Please select&hellip;</option>
+                  <option value="Early Morning (6:30am – 8:00am)">Early Morning (6:30am – 8:00am)</option>
+                  <option value="Morning (8:00am – 10:00am)">Morning (8:00am – 10:00am)</option>
+                  <option value="Late Morning (10:00am – 12:00pm)">Late Morning (10:00am – 12:00pm)</option>
+                  <option value="Early Afternoon (12:00pm – 1:00pm)">Early Afternoon (12:00pm – 1:00pm)</option>
+                  <option value="No Preference">No Preference</option>
+                </select>
+              </div>
+              <div class="form__group">
                 <label for="your_message" class="form__label form__label--required">Your Message</label>
                 <textarea id="your_message" name="your_message" class="form__textarea" required></textarea>
               </div>
-              <div class="form__group">
-                <label for="i_consent_to_my_data_being_stored_and_used_to_respond_to_my_enquiry_in_accordance_with_the_privacy_policy" class="form__label form__label--required">I consent to my data being stored and used to respond to my enquiry in accordance with the Privacy Policy.</label>
               <div class="form__group form__group--consent">
                 <label class="form__consent">
                   <input type="checkbox" name="i_consent_to_my_data_being_stored_and_used_to_respond_to_my_enquiry_in_accordance_with_the_privacy_policy" value="yes" required>
