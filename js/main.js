@@ -222,6 +222,16 @@
   }
 
   /* -----------------------------------------
+     ANTI-SPAM: Timestamp field
+     Set _t to page load time (epoch ms) so the
+     server can reject instant bot submissions.
+     ----------------------------------------- */
+  var tsField = document.querySelector('input[name="_t"]');
+  if (tsField) {
+    tsField.value = Date.now().toString();
+  }
+
+  /* -----------------------------------------
      CONTACT FORM — AJAX SUBMISSION
      Posts form data via fetch, shows inline
      success/error message, no page reload.
@@ -399,16 +409,6 @@
   }
 
   /* -----------------------------------------
-     ANTI-SPAM: Timestamp field
-     Set _t to page load time (epoch ms) so the
-     server can reject instant bot submissions.
-     ----------------------------------------- */
-  var tsField = document.querySelector('input[name="_t"]');
-  if (tsField) {
-    tsField.value = Date.now().toString();
-  }
-
-  /* -----------------------------------------
      COOKIE CONSENT BANNER
      Show banner if not previously accepted.
      Store preference in localStorage.
@@ -435,6 +435,36 @@
         cookieBanner.classList.remove('cookie-banner--visible');
       });
     }
+  }
+
+  /* -----------------------------------------
+     PARALLAX HERO
+     Applies to .hero--parallax: background drifts
+     up at 40% scroll speed, content fades out.
+  ----------------------------------------- */
+  var parallaxHero = document.querySelector('.hero--parallax');
+  if (parallaxHero) {
+    var parallaxContent = parallaxHero.querySelector('.hero__content');
+    var heroHeight = parallaxHero.offsetHeight;
+    var ticking = false;
+
+    window.addEventListener('scroll', function () {
+      if (!ticking) {
+        requestAnimationFrame(function () {
+          var scrollY = window.scrollY || window.pageYOffset;
+          heroHeight = parallaxHero.offsetHeight;
+          if (scrollY <= heroHeight) {
+            parallaxHero.style.backgroundPositionY = 'calc(50% + ' + (scrollY * 0.4) + 'px)';
+            if (parallaxContent) {
+              parallaxContent.style.transform = 'translateY(-' + (scrollY * 0.25) + 'px)';
+              parallaxContent.style.opacity = Math.max(1 - scrollY / (heroHeight * 0.7), 0);
+            }
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
   }
 
 })();
