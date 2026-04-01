@@ -294,7 +294,13 @@
     });
 
     revealEls.forEach(function (el) {
-      revealObserver.observe(el);
+      // Immediately reveal elements already in the viewport on page load
+      var rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        el.classList.add('reveal--visible');
+      } else {
+        revealObserver.observe(el);
+      }
     });
   } else {
     // Fallback: show everything immediately if no IntersectionObserver
