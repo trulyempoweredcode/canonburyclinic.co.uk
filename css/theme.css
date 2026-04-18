@@ -110,3 +110,7 @@
   pointer-events: none;
   z-index: 0;
 }
+
+.testimonials {
+  background-color: var(--color-surface);
+}
