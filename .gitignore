@@ -1,9 +1,16 @@
 # Source content (not deployable)
 Areas-of-treatment/
 Treatments/
-Testimonials/
 title-page/
-articles/
 assets/
 client-brief.md
 Hussein-welcome-video.mov
+
+# These two hold legacy source content AND a redirect stub for the old URL.
+# Ignore the contents but ship the stub, or /articles/ and /Testimonials/ 404 for anyone
+# arriving from an old link. Written as dir/* rather than dir/ because git cannot
+# re-include a file whose parent directory is itself excluded.
+Testimonials/*
+!Testimonials/index.html
+articles/*
+!articles/index.html
