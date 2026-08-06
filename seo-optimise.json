@@ -1,0 +1,40 @@
+{
+  "_comment": "Config for the monthly machine page-optimisation cycle (POST https://editmy.site/api/sites/4/seo/external). Read live from this repo by SeoExternalController. services maps rotation unit labels to pages; canonical is the title/meta the cycle asserts each visit - if a title or description is deliberately changed, update it here too or the next cycle reverts it. Process doc: TherapyWebgenie-SEO shared/processes.md 9d.",
+  "services": {
+    "back pain": { "page": "back-pain.html", "name": "Back Pain" },
+    "shockwave therapy": { "page": "shockwave-therapy.html", "name": "Shockwave Therapy" },
+    "laser therapy": { "page": "laser-therapy.html", "name": "Laser Therapy" },
+    "neck pain": { "page": "neck-pain.html", "name": "Neck Pain" },
+    "shoulder pain": { "page": "shoulder-arm-hand-pain.html", "name": "Shoulder Pain" },
+    "knee pain": { "page": "knee-pain.html", "name": "Knee Pain" }
+  },
+  "canonical": {
+    "back-pain.html": {
+      "title": "Back Pain Treatment Islington - Canonbury Clinic",
+      "description": "Expert osteopathic back pain treatment in Islington. Acute, chronic, sciatica and disc problems. 30 years experience."
+    },
+    "shockwave-therapy.html": {
+      "title": "Shockwave Therapy (ESWT) Islington - Canonbury Clinic",
+      "description": "Shockwave therapy in Islington for chronic pain and tendinopathy. Non-invasive acoustic energy treatment, results in as few as 3 sessions."
+    },
+    "laser-therapy.html": {
+      "title": "Laser Therapy Islington - Canonbury Clinic",
+      "description": "Laser therapy in Islington using the MiS MLS Class 4 system, the only UK osteopathic clinic with this technology. Advanced wound healing."
+    },
+    "neck-pain.html": {
+      "title": "Neck Pain Treatment Islington - Canonbury Clinic",
+      "description": "Stiff neck, trapped nerves and postural strain. Expert osteopathic neck pain treatment in Islington. Restore full movement."
+    },
+    "shoulder-arm-hand-pain.html": {
+      "title": "Shoulder & Arm Pain Treatment Islington - Canonbury Clinic",
+      "description": "Frozen shoulder, tennis elbow, RSI and upper limb pain. Expert osteopathic care in Islington. Restore full movement."
+    },
+    "knee-pain.html": {
+      "title": "Knee Pain Treatment Islington - Canonbury Clinic",
+      "description": "Ligament injuries, tendonitis and cartilage problems. Expert osteopathic knee pain treatment in Islington."
+    }
+  },
+  "faq_cap": 10,
+  "max_new": 5,
+  "faq_heading": "Frequently Asked Questions"
+}
