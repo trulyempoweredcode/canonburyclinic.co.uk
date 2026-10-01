@@ -241,10 +241,29 @@
     </section>
     <!-- /SECTION: page-header -->
 
-                                                                                                                    <!-- SECTION: blog-listing -->
+                                                                                                                        <!-- SECTION: blog-listing -->
     <section class="section reveal">
       <div class="container blog-grid">
 
+        <div class="blog-filters">
+          <button class="blog-filter blog-filter--active" data-category="all">All</button>
+          <button class="blog-filter" data-category="Back Pain">Back Pain</button>
+          <button class="blog-filter" data-category="Laser Therapy">Laser Therapy</button>
+        </div>
+
+        <div class="blog-card" data-category="Laser Therapy">
+          <img src="images/unit-3-1.jpg" alt="Laser Therapy: A Modern Approach to Pain Relief and Healing" class="blog-card__image">
+          <div class="blog-card__body">
+            <span class="blog-card__category">Laser Therapy</span>
+            <p class="blog-card__date">9 September 2026</p>
+            <h2 class="blog-card__title"><a href="blog/laser-therapy-a-modern-approach-to-pain-relief-and-healing.html">Laser Therapy: A Modern Approach to Pain Relief and Healing</a></h2>
+            <p class="blog-card__excerpt">Laser therapy at Canonbury Clinic for chronic tendon, joint and soft tissue pain in Islington, explained by osteopath Hussein alongside realistic expectations.</p>
+            <a href="blog/laser-therapy-a-modern-approach-to-pain-relief-and-healing.html" class="blog-card__link">
+              Read more
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+          </div>
+        </div>
         <div class="blog-card">
           <img src="images/Shockwave-Therapy.jpg" alt="Shockwave Therapy: A Powerful Solution for Chronic Pain Relief" class="blog-card__image">
           <div class="blog-card__body">
@@ -450,5 +469,22 @@
   </button>
 
   <script src="js/main.js?v=132"></script>
+
+  <!-- blog-filter-script -->
+  <script>
+  (function(){
+    var btns = document.querySelectorAll('.blog-filter');
+    btns.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        btns.forEach(function(b){ b.classList.remove('blog-filter--active'); });
+        btn.classList.add('blog-filter--active');
+        var cat = btn.getAttribute('data-category');
+        document.querySelectorAll('.blog-card').forEach(function(card){
+          card.style.display = (cat === 'all' || card.getAttribute('data-category') === cat) ? '' : 'none';
+        });
+      });
+    });
+  })();
+  </script>
 </body>
 </html>
