@@ -2607,6 +2607,14 @@ a.card--service:hover .card__link {
   padding: var(--space-2xl);
 }
 
+/* v1.7.12 - at phone width 48px of card padding left a 229px field inside a 327px card and the
+   enquiry dropdown truncated its own selected value (Elspeth Campbell review, 2026-09-17). */
+@media (max-width: 767px) {
+  .contact-form-card {
+    padding: var(--space-lg);
+  }
+}
+
 .contact-form-card h2 {
   font-size: var(--text-xl);
   margin-bottom: var(--space-sm);
@@ -2930,6 +2938,13 @@ a.card--service:hover .card__link {
   column-gap: var(--space-lg);
   row-gap: var(--space-xs);
   align-items: start;
+  /* v1.7.7 — align-CONTENT, not just align-items. The card is stretched by the
+     parent grid to match its tallest sibling, and without this the surplus
+     height inflates the heading ROW rather than sitting below the content, so
+     a short card shows an ~80px hole between its h3 and its body text. Only
+     visible when items in a row have uneven text lengths, which is why the
+     even-length theme-preview demo never showed it. */
+  align-content: start;
   padding: var(--space-lg);
   background-color: var(--color-surface);
   border-radius: var(--radius-lg);
@@ -3049,7 +3064,10 @@ a.card--service:hover .card__link {
   position: relative;
   padding-left: var(--space-xl);
   margin-bottom: var(--space-sm);
-  font-size: var(--text-sm);
+  /* v1.7.13 - inherit, not --text-sm. A post or service write-up puts a list
+     straight after paragraphs, and at --text-sm the bullets read 16px against
+     19px prose (canonburyclinic.co.uk blog posts, 2026-10-01). */
+  font-size: inherit;
   color: var(--color-text-light);
   line-height: var(--line-height-normal);
 }
@@ -3058,7 +3076,8 @@ a.card--service:hover .card__link {
   content: '';
   position: absolute;
   left: 0;
-  top: 7px;
+  /* Centred on the first line at any font size (was a fixed 7px). */
+  top: calc(var(--line-height-normal) * 0.5em - 4px);
   width: 8px;
   height: 8px;
   border-radius: var(--radius-full);
@@ -3393,14 +3412,36 @@ a.card--service:hover .card__link {
   color: var(--color-secondary-light);
 }
 
+/* Breadcrumbs on a dark page-header.
+   TWO NAMING CONVENTIONS ON PURPOSE - do not "tidy" either set away.
+   PLURAL (.breadcrumbs__item / __separator / __item--active) is the real one:
+   it is what blog-post.html, theme-preview.html and 44 client pages actually
+   emit, and it is the set with base styling further down this file. Only the
+   SINGULAR names (.breadcrumb__link / __current / __separator) were listed here
+   originally, so they matched nothing and a dark header left the breadcrumbs in
+   their default dark-on-dark colours, i.e. invisible. The singular selectors are
+   retained purely so any hand-written markup using them keeps working.
+   The anchor is overridden explicitly: .breadcrumbs__item a sets its own colour,
+   so colouring only the parent item would never reach the link. */
+.page-header--dark .breadcrumbs__item,
 .page-header--dark .breadcrumb__link {
   color: rgba(255, 255, 255, 0.7);
 }
 
+.page-header--dark .breadcrumbs__item a {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.page-header--dark .breadcrumbs__item a:hover {
+  color: var(--color-text-inverse);
+}
+
+.page-header--dark .breadcrumbs__item--active,
 .page-header--dark .breadcrumb__current {
   color: var(--color-text-inverse);
 }
 
+.page-header--dark .breadcrumbs__separator,
 .page-header--dark .breadcrumb__separator {
   color: rgba(255, 255, 255, 0.4);
 }
@@ -3459,15 +3500,38 @@ a.card--service:hover .card__link {
 .page-header--dark .page-header__meta {
   color: rgba(255, 255, 255, 0.75);
 }
+/* v1.7.12 - button row under a page-header. A page-header used as a mid-page
+   image band (Elspeth Campbell, 2026-09-17) had its button sitting flush on the
+   paragraph because .page-header p carries margin: 0 auto. One slot owns the gap. */
+.page-header__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  justify-content: center;
+  margin-top: var(--space-lg);
+}
 
+/* Breadcrumbs on an image page-header. Same two-convention story as
+   .page-header--dark above - see the comment there before editing. */
+.page-header--image .breadcrumbs__item,
 .page-header--image .breadcrumb__link {
   color: rgba(255, 255, 255, 0.7);
 }
 
+.page-header--image .breadcrumbs__item a {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.page-header--image .breadcrumbs__item a:hover {
+  color: var(--color-text-inverse);
+}
+
+.page-header--image .breadcrumbs__item--active,
 .page-header--image .breadcrumb__current {
   color: var(--color-text-inverse);
 }
 
+.page-header--image .breadcrumbs__separator,
 .page-header--image .breadcrumb__separator {
   color: rgba(255, 255, 255, 0.4);
 }
@@ -3561,7 +3625,8 @@ a.card--service:hover .card__link {
 
 .footer__legal {
   display: flex;
-  gap: var(--space-lg);
+  flex-wrap: wrap;
+  gap: var(--space-xs) var(--space-lg);
   justify-content: center;
 }
 
@@ -4061,6 +4126,21 @@ a.card--service:hover .card__link {
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
+}
+
+/* v1.7.7 — a checklist followed by more content collided with it (0px where
+   the normal paragraph gap is 16px), because the list carries no bottom
+   margin. Two exclusions, both load-bearing:
+     :not(:last-child)          — a checklist that ENDS its container keeps
+                                  margin 0, so no existing layout shifts.
+     :not(.checklist-grid) >    — inside .checklist-grid the lists are siblings
+                                  spaced by the grid's own `gap`; adding a
+                                  margin there double-spaces and grew the grid
+                                  by 16px (measured 290 -> 306 in
+                                  theme-preview). The first, unscoped version of
+                                  this rule DID regress it. */
+:not(.checklist-grid) > .checklist:not(:last-child) {
+  margin-bottom: var(--space-md);
 }
 
 /* Checklist items that use inline SVG instead of ::before — constrain SVG size */
@@ -7287,6 +7367,14 @@ a.card--service:hover .card__link {
 /* =============================================
    CARD HOVER LIFTS
    Subtle lift effect on interactive cards.
+
+   .team-card intentionally has NO base rule and must not be given one. It is a
+   hover-intensity hook, not a standalone component: it is always written
+   alongside .card (see creativewellness.co.uk/about.html, which uses
+   "card card--image-top card--portrait team-card"), so .card supplies the base
+   styling and .card:hover the default -2px lift, and this rule upgrades that
+   lift to -4px. The real standalone team component is .team-member.
+   Do not delete it as an orphan either - a live client site depends on it.
    ============================================= */
 .card--service:hover,
 .icon-box--card:hover,
@@ -7351,23 +7439,15 @@ a.card--service:hover .card__link {
   box-shadow: none;
 }
 
-/* =============================================
-   SMOOTH LINK UNDERLINE ANIMATION
-   Animated underline grows from left on hover.
-   ============================================= */
-.content a:not(.btn) {
-  text-decoration: none;
-  background-image: linear-gradient(var(--color-primary), var(--color-primary));
-  background-size: 0% 2px;
-  background-position: left bottom;
-  background-repeat: no-repeat;
-  transition: background-size var(--transition-base);
-  padding-bottom: 1px;
-}
-
-.content a:not(.btn):hover {
-  background-size: 100% 2px;
-}
+/* SMOOTH LINK UNDERLINE ANIMATION - REMOVED in v1.7.10.
+   It was scoped to `.content`, and no element in master or across the fleet has
+   ever carried that class: a sweep of every shipped page in master-site-template
+   and all client sites found zero exact `content` class tokens. (Beware the false
+   positive - a substring search matches `privacy-content` and `cookies-content`
+   and reports ~74 pages.) So the rule could never fire. Prose links are handled
+   by the `main p a` / `main li a` rule instead - see the "Inline content links"
+   entry in COMPONENTS.md. If an animated underline is ever wanted, add it there
+   rather than reviving a class nothing applies. */
 
 /* =============================================
    PRINT STYLES
@@ -8661,6 +8741,22 @@ main > .section--alt + .section--alt:not(.section--dark):not(.cta-banner):not(.c
   margin-bottom: var(--space-xs);
   color: var(--color-text-light);
   line-height: var(--line-height-relaxed);
+}
+/* v1.7.13 - .service-detail draws its own dot with ::before, but the rules
+   above out-rank .service-detail ul (0,2,1 vs 0,1,1), so a plain list in a
+   .service-detail column got the browser's disc beside that dot: a double
+   bullet in every post body (canonburyclinic.co.uk, 2026-10-01). Hand those
+   lists back to the component. Added as an override rather than by narrowing
+   the selectors above, because a selector that disappears from this file is
+   copied into each site's theme.css by the update's orphan-CSS migration,
+   which would bring the double bullet straight back. */
+.section .service-detail ul:not([class]) {
+  list-style: none;
+  padding-left: 0;
+}
+.section .service-detail ul:not([class]) li {
+  margin-bottom: var(--space-sm);
+  line-height: var(--line-height-normal);
 }
 
 /* ============================================
