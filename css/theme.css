@@ -192,3 +192,10 @@ main > .section--alt + .section--alt:not(.section--dark):not(.cta-banner) {
 }
 
 /* === END BACKFILL === */
+
+/* Dark header (home page): white menu words on the dark bar.
+   Uses the framework's --nav-bar-text hook, scoped to the dark header so the
+   white headers on the other pages keep their dark text. */
+.nav--two-tier.nav--transparent-dark {
+  --nav-bar-text: var(--color-text-inverse);
+}
