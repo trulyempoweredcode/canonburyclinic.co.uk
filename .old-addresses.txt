@@ -123,3 +123,5 @@
 /news.php
 /testimonials/
 /videos.php
+/blog/back-pain-angles-explained-by-an-osteopath.html
+/blog/what-to-expect-from-shockwave-therapy-at-your-first-session.html
